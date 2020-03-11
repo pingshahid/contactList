@@ -167,7 +167,8 @@ function AddContact({navigation}) {
  			<Avatar
  			  rounded
  			  size="xlarge"
- 			  icon={{ name: "person" }}
+               icon={{ name: "person" }}
+               source={{uri:uri}}
 			/>
 		</TouchableOpacity>
                         

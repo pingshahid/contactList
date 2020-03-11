@@ -67,7 +67,7 @@ function ShowFavContactList({navigation}) {
   
 React.useEffect(()=>{
  fetchData();
-});
+},[]);
 
 console.log('******');
     if (contacts.length  > 0) {
