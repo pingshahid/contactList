@@ -1,0 +1,4 @@
+#Wed Mar 11 12:43:03 IST 2020
+base.0=/Users/mohammadshahid/Documents/react-native-proj/navTestApp/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
