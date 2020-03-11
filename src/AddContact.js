@@ -176,6 +176,7 @@ function AddContact({navigation}) {
                         <Item>
                             <Input
                                 placeholder='Name'
+                                value={name}
                                 autoFocus
                                 clearButtonMode='always'
                                 autoCorrect={false}
@@ -190,6 +191,7 @@ function AddContact({navigation}) {
                             <Input
                                 placeholder='Mobile'
                                 autoFocus
+                                value={mobile}
                                 clearButtonMode='always'
                                 autoCorrect={false}
                                 onChange={this.onChangeText}
@@ -204,6 +206,7 @@ function AddContact({navigation}) {
                             <Input
                                 placeholder='Landline'
                                 autoFocus
+                                value={landline}
                                 clearButtonMode='always'
                                 autoCorrect={false}
                                 onChange={this.onChangeText}

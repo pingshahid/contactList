@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, FlatList, Text, StyleSheet,AsyncStorage } from "react-native";
+import { View, FlatList, Text, StyleSheet,AsyncStorage,TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 
 import  Contact  from "./Contact";
@@ -18,7 +18,9 @@ const styles = StyleSheet.create({
 });
 
 const getKey = item => item.mobile;
-const renderContact = ({ item }) => <Contact {...item} />;
+const renderContact = ({ item }) => (<TouchableOpacity onPress={() => onPressItem(item)}>
+< Contact {...item} />
+</TouchableOpacity>);
 const renderEmptyList = (navigation) => (
   <View style={styles.emptyListContainer}>
     <Icon size={64} name="mood-bad" color={DIVIDER} />
@@ -32,6 +34,8 @@ const renderEmptyList = (navigation) => (
 
 
 function ShowFavContactList({navigation}) {
+
+
 
   var initialVal = [];
 
@@ -68,6 +72,10 @@ function ShowFavContactList({navigation}) {
 React.useEffect(()=>{
  fetchData();
 },[]);
+
+onPressItem = (item) =>{
+  console.log(item);
+}
 
 console.log('******');
     if (contacts.length  > 0) {

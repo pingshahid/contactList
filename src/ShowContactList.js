@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, FlatList, Text, StyleSheet,AsyncStorage } from "react-native";
+import { View, FlatList, Text, StyleSheet,AsyncStorage,TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 
 import  Contact  from "./Contact";
@@ -18,7 +18,9 @@ const styles = StyleSheet.create({
 });
 
 const getKey = item => item.mobile;
-const renderContact = ({ item }) => <Contact {...item} />;
+const renderContact = ({ item }) => (<TouchableOpacity onPress={() => onPressItem(item)}>
+< Contact {...item} />
+</TouchableOpacity>);
 const renderEmptyList = (navigation) => (
   <View style={styles.emptyListContainer}>
     <Icon size={64} name="mood-bad" color={DIVIDER} />
@@ -43,7 +45,6 @@ function ShowContactList({navigation}) {
   var initialVal = [];//[{'name':'shahid','mobile':'12'}];
 
   const [contacts, setContacts] = useState([]);
-  const [isDataLoaded,setIsDataLoaded] = useState(false);
 
   // const [state, dispatch] = useReducer(reducer, initialVal);
   // const {contacts} = state;
@@ -61,23 +62,21 @@ function ShowContactList({navigation}) {
           return true;
         });
         console.log('##1');
-        console.log(isDataLoaded);
-        if (isDataLoaded == false){
           console.log('##');
-          setIsDataLoaded(true);
           initialVal.sort((a, b) => (a.name > b.name) ? 1 : -1)
           console.log(initialVal);
           setContacts(initialVal);
-        }
-        
-  
       });
     });
   }
   
 React.useEffect(()=>{
  fetchData();
-});
+},[]);
+
+onPressItem = (item) =>{
+  console.log(item);
+}
 
 console.log('******');
     if (contacts.length  > 0) {
@@ -92,7 +91,7 @@ console.log('******');
         </View>
         <ActionButton
               buttonColor="rgba(231,76,60,1)"
-              onPress={() => { navigation.push('Add Contact'); setIsDataLoaded(false);}}
+              onPress={() => { navigation.push('Add Contact')}}
         />
       </View>
       );
