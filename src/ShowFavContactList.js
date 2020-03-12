@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 });
 
 const getKey = item => item.mobile;
-const renderContact = ({ item }) => (<TouchableOpacity onPress={() => onPressItem(item)}>
+const renderContact =(navigation) => ({ item }) => (<TouchableOpacity onPress={() => onPressItem(item,navigation)}>
 < Contact {...item} />
 </TouchableOpacity>);
 const renderEmptyList = (navigation) => (
@@ -35,14 +35,9 @@ const renderEmptyList = (navigation) => (
 
 function ShowFavContactList({navigation}) {
 
-
-
   var initialVal = [];
 
   const [contacts, setContacts] = useState([]);
-  const [isDataLoaded,setIsDataLoaded] = useState(false);
-
-
   async function fetchData(){
     AsyncStorage.getAllKeys((err, keys) => {
       AsyncStorage.multiGet(keys, (error, stores) => {
@@ -52,18 +47,12 @@ function ShowFavContactList({navigation}) {
         
           return true;
         });
-        console.log(isDataLoaded);
-        if (isDataLoaded === false){
-          setIsDataLoaded(true);
-          initialVal = initialVal.filter(function( obj ) {
-            return obj.fav == true;
-          });
-          initialVal.sort((a, b) => (a.name > b.name) ? 1 : -1)
-          console.log('fav');
-          console.log(initialVal);
-          setContacts(initialVal);
-        }
-        
+        initialVal = initialVal.filter(function( obj ) {
+          return obj.fav == true;
+        });
+        initialVal.sort((a, b) => (a.name > b.name) ? 1 : -1)
+        setContacts(initialVal);
+      
   
       });
     });
@@ -73,9 +62,12 @@ React.useEffect(()=>{
  fetchData();
 },[]);
 
-onPressItem = (item) =>{
+onPressItem = (item,navigation) =>{
   console.log(item);
-}
+  { navigation.push('Add Contact', { Name : item.name, Mobile : item.mobile,
+    Landline : item.landline,Fav : item.fav,URI : item.uri}) }
+ }
+
 
 console.log('******');
     if (contacts.length  > 0) {
@@ -84,7 +76,7 @@ console.log('******');
         <FlatList
           data={contacts}
           keyExtractor={getKey}
-          renderItem={renderContact}
+          renderItem={renderContact(navigation)}
         />
       </View>
       );

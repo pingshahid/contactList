@@ -76,8 +76,8 @@ React.useEffect(()=>{
 
 onPressItem = (item,navigation) =>{
   console.log(item);
-  { navigation.push('Add Contact', { Name : JSON.stringify(item.name), Mobile : JSON.stringify(item.mobile),
-   Landline : JSON.stringify(item.landline),Fav : JSON.stringify(item.fav),URI : JSON.stringify(item.uri)}) }
+  { navigation.push('Add Contact', { Name : item.name, Mobile : item.mobile,
+   Landline : item.landline,Fav : item.fav,URI : item.uri}) }
 }
 
 console.log('******');
@@ -103,22 +103,5 @@ console.log('******');
       );
     }
 }
-// const ShowContactList = ({ navigation }) =>
-//   contacts && contacts.length > 0 ? (
-//     <View>
-//     <FlatList
-//       data={contacts}
-//       keyExtractor={getKey}
-//       renderItem={renderContact}
-//     />
-//     <ActionButton
-//   				buttonColor="rgba(231,76,60,1)"
-//   				onPress={() => { navigation.push('Add Contact')}}
-// 		/>
-// </View>
-//   ) : (
-//     renderEmptyList()
-//   );
-
 
 export default ShowContactList;

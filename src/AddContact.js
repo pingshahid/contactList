@@ -37,16 +37,13 @@ function AddContact({route,navigation}) {
     const editedData = route.params;
 
 
-    const {Name} = editedData;
-    const {Mobile} = editedData;
-    const {Landline} = editedData;
-    const {Fav} = editedData;
-    const {URI} = editedData;
+    const {Name} = editedData != null ? editedData : '';
+    const {Mobile} = editedData != null ? editedData : '';
+    const {Landline} = editedData != null ? editedData : '';
+    const {Fav} = editedData != null ? editedData : '';
+    const {URI} = editedData != null ? editedData : '';
 
-    console.log('props');
-    console.log(Name);
-    console.log('props1');
-    const [state, dispatch] = useReducer(reducer, {name:'',mobile:'',landline:'',fav:false,uri:''});
+    const [state, dispatch] = useReducer(reducer, {name:Name,mobile:Mobile,landline:Landline,fav:Fav,uri:URI});
     const {name, mobile, landline,fav,uri} = state;
     
 
@@ -123,8 +120,6 @@ function AddContact({route,navigation}) {
 
     onAddTask = () => {
         
-        //this.props.navigation.state.params.saveItem(this.state.task)
-        //this.props.navigation.goBack()
         if (name.length == 0){
             alert('Please enter Name')
         }else if(mobile.length < 10){
@@ -190,6 +185,7 @@ function AddContact({route,navigation}) {
                         <Item>
                             <Input
                                 placeholder='Name'
+                                defaultValue={Name}
                                 autoFocus
                                 clearButtonMode='always'
                                 autoCorrect={false}
@@ -204,6 +200,7 @@ function AddContact({route,navigation}) {
                             <Input
                                 placeholder='Mobile'
                                 clearButtonMode='always'
+                                defaultValue={Mobile}
                                 autoCorrect={false}
                                 onChange={this.onChangeText}
                                 onEndEditing={this.onEndMobileFieldEditingText}
@@ -217,6 +214,7 @@ function AddContact({route,navigation}) {
                             <Input
                                 placeholder='Landline'
                                 clearButtonMode='always'
+                                defaultValue={Landline}
                                 autoCorrect={false}
                                 onChange={this.onChangeText}
                                 onEndEditing={this.onEndLandLineFieldEditingText}
