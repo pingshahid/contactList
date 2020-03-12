@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 });
 
 const getKey = item => item.mobile;
-const renderContact = ({ item }) => (<TouchableOpacity onPress={() => onPressItem(item)}>
+const renderContact =(navigation) => ({ item }) => (<TouchableOpacity onPress={() => onPressItem(item,navigation)}>
 < Contact {...item} />
 </TouchableOpacity>);
 const renderEmptyList = (navigation) => (
@@ -42,7 +42,7 @@ const renderEmptyList = (navigation) => (
 
 function ShowContactList({navigation}) {
 
-  var initialVal = [];//[{'name':'shahid','mobile':'12'}];
+  var initialVal = [];
 
   const [contacts, setContacts] = useState([]);
 
@@ -74,8 +74,10 @@ React.useEffect(()=>{
  fetchData();
 },[]);
 
-onPressItem = (item) =>{
+onPressItem = (item,navigation) =>{
   console.log(item);
+  { navigation.push('Add Contact', { Name : JSON.stringify(item.name), Mobile : JSON.stringify(item.mobile),
+   Landline : JSON.stringify(item.landline),Fav : JSON.stringify(item.fav),URI : JSON.stringify(item.uri)}) }
 }
 
 console.log('******');
@@ -86,7 +88,7 @@ console.log('******');
         <FlatList
           data={contacts}
           keyExtractor={getKey}
-          renderItem={renderContact}
+          renderItem={renderContact(navigation)}
         />
         </View>
         <ActionButton

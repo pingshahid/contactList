@@ -31,12 +31,26 @@ const reducer = (state,action) =>{
 }
 
 
-function AddContact({navigation}) {
+function AddContact({route,navigation}) {
 
 
+    const editedData = route.params;
+
+
+    const {Name} = editedData;
+    const {Mobile} = editedData;
+    const {Landline} = editedData;
+    const {Fav} = editedData;
+    const {URI} = editedData;
+
+    console.log('props');
+    console.log(Name);
+    console.log('props1');
     const [state, dispatch] = useReducer(reducer, {name:'',mobile:'',landline:'',fav:false,uri:''});
     const {name, mobile, landline,fav,uri} = state;
+    
 
+    console.log(name);
     pickPicture = () => {
         console.log('picture');
 
@@ -176,7 +190,6 @@ function AddContact({navigation}) {
                         <Item>
                             <Input
                                 placeholder='Name'
-                                value={name}
                                 autoFocus
                                 clearButtonMode='always'
                                 autoCorrect={false}
@@ -190,8 +203,6 @@ function AddContact({navigation}) {
                         <Item>
                             <Input
                                 placeholder='Mobile'
-                                autoFocus
-                                value={mobile}
                                 clearButtonMode='always'
                                 autoCorrect={false}
                                 onChange={this.onChangeText}
@@ -205,8 +216,6 @@ function AddContact({navigation}) {
                         <Item>
                             <Input
                                 placeholder='Landline'
-                                autoFocus
-                                value={landline}
                                 clearButtonMode='always'
                                 autoCorrect={false}
                                 onChange={this.onChangeText}
