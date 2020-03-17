@@ -68,9 +68,9 @@ onSelect = () => {
 
 onPressItem = (item,navigation) =>{
   console.log(item);
-  { navigation.push('Add Contact', { Name : item.name, Mobile : item.mobile,
-    Landline : item.landline,Fav : item.fav,URI : item.uri, onSelect: this.onSelect }) }
- 
+    { navigation.push('Add Contact', { Name : item.name, Mobile : item.mobile,
+   Landline : item.landline,Fav : item.fav,URI : item.uri, onSelect: this.onSelect }) }
+    }
 
 
 console.log('******');
