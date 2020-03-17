@@ -27,7 +27,7 @@ const renderEmptyList = (navigation) => (
     <Text style={styles.emptyListTitle}>A little lonely in here...</Text>
     <ActionButton
               buttonColor="rgba(231,76,60,1)"
-              onPress={() => { navigation.push('Add Contact')}}
+              onPress={() => { navigation.push('Add Contact' , {onSelect : this.onSelect })}}
         />
   </View>
 );
@@ -74,10 +74,15 @@ React.useEffect(()=>{
  fetchData();
 },[]);
 
+onSelect = () => {
+  fetchData();
+};
+
+
 onPressItem = (item,navigation) =>{
   console.log(item);
   { navigation.push('Add Contact', { Name : item.name, Mobile : item.mobile,
-   Landline : item.landline,Fav : item.fav,URI : item.uri}) }
+   Landline : item.landline,Fav : item.fav,URI : item.uri, onSelect: this.onSelect }) }
 }
 
 console.log('******');
@@ -93,7 +98,7 @@ console.log('******');
         </View>
         <ActionButton
               buttonColor="rgba(231,76,60,1)"
-              onPress={() => { navigation.push('Add Contact')}}
+              onPress={() => { navigation.push('Add Contact', {onSelect : this.onSelect })}}
         />
       </View>
       );

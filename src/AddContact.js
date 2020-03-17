@@ -42,12 +42,13 @@ function AddContact({route,navigation}) {
     const {Landline} = editedData != null ? editedData : '';
     const {Fav} = editedData != null ? editedData : '';
     const {URI} = editedData != null ? editedData : '';
+    const {onSelect} = editedData != null ? editedData : '';
 
     const [state, dispatch] = useReducer(reducer, {name:Name,mobile:Mobile,landline:Landline,fav:Fav,uri:URI});
     const {name, mobile, landline,fav,uri} = state;
     
 
-    console.log(name);
+    //console.log(name);
     pickPicture = () => {
         console.log('picture');
 
@@ -75,14 +76,14 @@ function AddContact({route,navigation}) {
 
     getPicture = () => {
         pickPicture();
-         console.log('getPicture');
+         //console.log('getPicture');
     }
 
 		React.useLayoutEffect(() => {
             AsyncStorage.getAllKeys((err, keys) => {
                 AsyncStorage.multiGet(keys, (error, stores) => {
                   stores.map((result, i, store) => {
-                    console.log({ [store[i][0]]: store[i][1] });
+                    //console.log({ [store[i][0]]: store[i][1] });
                     return true;
                   });
                 });
@@ -128,10 +129,13 @@ function AddContact({route,navigation}) {
             alert('Please enter a valid Landline Number')
         }else{
             const objectToBeSaved = { 'name':name,'mobile':mobile,'landline':landline,'fav':fav,'uri':uri };
+            console.log(objectToBeSaved);
             AsyncStorage.setItem(mobile, JSON.stringify(objectToBeSaved) )
             .then( ()=>{
                 console.log('It was saved successfully');
+                
                 navigation.goBack();
+                onSelect();
             } )
                 .catch( ()=>{
                 console.log('There was an error saving the product');
@@ -140,7 +144,7 @@ function AddContact({route,navigation}) {
 
 
         
-        console.log(state);
+        //console.log(state);
     }
 
     onFavTapped = () =>{
@@ -148,16 +152,16 @@ function AddContact({route,navigation}) {
     }
 
     onEndNameFieldEditingText = event =>{
-        console.log(event.nativeEvent.text);
+        //console.log(event.nativeEvent.text);
         dispatch({fieldToChange: 'name', value : event.nativeEvent.text})
     }
 
     onEndMobileFieldEditingText = event =>{
-        console.log(event.nativeEvent.text);
+        //console.log(event.nativeEvent.text);
         dispatch({fieldToChange: 'mobile', value : event.nativeEvent.text})
     }
     onEndLandLineFieldEditingText = event =>{
-        console.log(event.nativeEvent.text);
+        //console.log(event.nativeEvent.text);
         dispatch({fieldToChange: 'landline', value : event.nativeEvent.text})
     }
   
